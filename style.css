@@ -1,0 +1,37 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.background {
+  position: relative;
+  background-image: url("/img/background.svg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height: 50vh;
+  width: 100vw;
+}
+.dino {
+  position: absolute;
+  left: 100px;
+  bottom: 20px;
+  transition: 0.1s;
+}
+.cactus {
+  position: absolute;
+  z-index: 10;
+  bottom: 10px;
+  background-image: url("img/cactus.svg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain;
+  width: 60px;
+  height: 120px;
+}
