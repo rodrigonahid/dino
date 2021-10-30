@@ -1,7 +1,8 @@
 const Game = {
   dino: document.querySelector("#dino"),
   background: document.querySelector(".background"),
-  isJumping: false,
+  randomTime: Math.random() * 6000,
+  position: 20,
   handleSpacebar: function () {
     document.addEventListener("keydown", (event) => {
       if (event.code === "Space") {
@@ -10,22 +11,44 @@ const Game = {
     });
   },
   jump: function () {
-    if (!this.isJumping) {
-      this.isJumping = true;
-      this.dino.style.bottom = "120px";
+    if (this.position <= 120) {
+      this.position = 120;
+      this.dino.style.bottom = `${this.position}px`;
       setTimeout(() => {
-        this.dino.style.bottom = "20px";
-        this.isJumping = false;
+        this.position = 20;
+        this.dino.style.bottom = `${this.position}px`;
       }, 500);
     }
   },
   createCactus: function () {
-    const cactus = document.createElement("div");
-    cactus.classList.add("cactus");
-    cactus.style.left = "1000px";
-    this.background.appendChild(cactus);
-    console.log(cactus);
+    const Background = document.querySelector(".background");
+    const Cactus = document.createElement("div");
+    let cactusPosition = 1000;
+    Cactus.classList.add("cactus");
+    Cactus.style.left = `${cactusPosition}px`;
+    console.log(this.background, Background, Cactus);
+    Background.appendChild(Cactus);
+
+    let leftInterval = setInterval(() => {
+      if (cactusPosition < -60) {
+        clearInterval(leftInterval);
+      } else if (
+        cactusPosition >= 100 &&
+        cactusPosition <= 180 &&
+        this.position < 30
+      ) {
+        window.alert("AAAOOOPAAA");
+        clearInterval(leftInterval);
+
+        return;
+      } else {
+        cactusPosition -= 10;
+        Cactus.style.left = `${cactusPosition}px`;
+      }
+    }, 20);
+    setTimeout(this.createCactus, this.randomTime);
   },
 };
+
 Game.handleSpacebar();
 Game.createCactus();
